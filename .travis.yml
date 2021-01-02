@@ -1,0 +1,24 @@
+sudo: required
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - docker build -t froliceric/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true froliceric/react-test npm test
+
+after_success:
+  - docker build -t froliceric/multi-client ./client
+  - docker build -t froliceric/multi-nginx ./nginx
+  - docker build -t froliceric/multi-server ./server
+  - docker build -t froliceric/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push froliceric/multi-client
+  - docker push froliceric/multi-nginx
+  - docker push froliceric/multi-server
+  - docker push froliceric/multi-worker
