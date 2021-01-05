@@ -4,7 +4,33 @@
     {
       "name": "client",
       "image": "froliceric/multi-client",
-      "hostname": "client"
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "froliceric/multi-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "froliceric/multi-worker",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "multi-nginx",
+      "host": "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"]
     }
   ]
 }
