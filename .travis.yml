@@ -22,3 +22,15 @@ after_success:
   - docker push froliceric/multi-nginx
   - docker push froliceric/multi-server
   - docker push froliceric/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-us-east-2-632833733508
+  bucket_path: multi-docker
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
