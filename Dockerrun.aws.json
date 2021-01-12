@@ -24,7 +24,7 @@
     },
     {
       "name": "nginx",
-      "image": "multi-nginx",
+      "image": "froliceric/multi-nginx",
       "host": "nginx",
       "essential": true,
       "portMappings": [
