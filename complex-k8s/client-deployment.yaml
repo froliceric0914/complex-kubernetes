@@ -5,14 +5,15 @@ metadata:
 spec:
   replicas: 3
   selector:
-    metaLabels:
+    matchLabels:
       component: web
   template:
     metadata:
       labels:
         component: web
     spec:
-      - name: client
-        image: frolcieric/multi-client
-        ports:
-          - containerPort: 3000
+      containers:
+        - name: client
+          image: frolcieric/multi-client
+          ports:
+            - containerPort: 3000
