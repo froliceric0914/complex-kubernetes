@@ -12,5 +12,5 @@ docker push froliceric/multi-worker:$SHA
 
 kubectl apply -f complex-k8s
 kubectl set image deployments/server-deployment server=froliceric/multi-server:$SHA
-kubectl set image deployments/client -deployment client=froliceric/multi-server:$SHA
-kubectl set image deployments/worker-deployment worker=froliceric/multi-server:$SHA
+kubectl set image deployments/client-deployment client=froliceric/multi-client:$SHA
+kubectl set image deployments/worker-deployment worker=froliceric/multi-worker:$SHA
